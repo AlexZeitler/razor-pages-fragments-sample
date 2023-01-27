@@ -22,7 +22,7 @@ It contains
 
 ```
 yarn install
-cd src/AspNetCoreRazorPages
+cd src/RazorPagesFragments
 yarn install
 ```
 
@@ -56,18 +56,18 @@ Browse https://localhost:5001
 
 Of course, you want to rename the projects files to match our needs.
 
-You can use these commands, e.g. `AspNetCoreRazorPages`  gets renamed to `MyApp`:
+You can use these commands, e.g. `RazorPagesFragments`  gets renamed to `MyApp`:
 
 ### Rename all references inside the files
 
 ```bash
-LC_ALL=C find . -type f -name '*.*' -not \( -path './node_modules/*' -o -path './src/AspNetCoreRazorPages/node_modules/*' -o -path './assets' \) -exec sed -i '' 's|AspNetCoreRazorPages|MyApp|g' {} \;
+LC_ALL=C find . -type f -name '*.*' -not \( -path './node_modules/*' -o -path './src/RazorPagesFragments/node_modules/*' -o -path './assets' \) -exec sed -i '' 's|RazorPagesFragments|MyApp|g' {} \;
 ```
 
 ### Rename files and folders
 
 ```bash
-find . -depth -name "*AspNetCoreRazorPages*" | \
-while IFS= read -r ent; do mv $ent ${ent%AspNetCoreRazorPages*}MyApp${ent##*AspNetCoreRazorPages}; done
+find . -depth -name "*RazorPagesFragments*" | \
+while IFS= read -r ent; do mv $ent ${ent%RazorPagesFragments*}MyApp${ent##*RazorPagesFragments}; done
 
 ```
