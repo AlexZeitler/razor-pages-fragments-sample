@@ -1,11 +1,43 @@
-﻿@page
+﻿@page "{handler?}"
 @model IndexModel
 @{
   ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-  <h1 class="mb-4 text-4xl">Welcome</h1>
-  <p>Learn about <a class="text-blue-500" href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET
-      Core</a>.</p>
-</div>
+@{
+  void RenderDetail(
+    ChildModel child)
+  {
+    <div class="bg-gray-200">
+      <a href="@Url.PageLink("Index", "Details", new {Id = child.Id})">@child.Id</a>
+    </div>
+  }
+
+  void RenderFull(
+    ParentModel parent)
+  {
+    <div class="bg-blue-500 p-4">
+      @{
+        @foreach (var parentChild in parent.Childs)
+        {
+          RenderDetail(parentChild);
+        }
+      }
+    </div>
+  }
+}
+
+
+@{
+  switch (Model.PageModel.FragmentId)
+  {
+    case "Full":
+      RenderFull(Model.PageModel as ParentModel);
+      break;
+    case "Detail":
+      RenderDetail(Model.PageModel as ChildModel);
+      break;
+    default:
+      throw new ArgumentOutOfRangeException();
+  }
+}
